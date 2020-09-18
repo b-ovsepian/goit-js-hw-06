@@ -56,24 +56,63 @@ const sortByYear = (users) => users.sort(sortYear);
 console.table(sortByYear(arr));
 // == task-4 == //
 // Видалити з масива вчених що народилися в 15 або 16 або 17 столітті
-
-// // == task-5 == //
+const getNamesDelete = (users) =>
+  users.filter(
+    (user) =>
+      !(
+        Math.ceil(user.born / 100) === 17 ||
+        Math.ceil(user.born / 100) === 16 ||
+        Math.ceil(user.born / 100) === 15
+      )
+  );
+console.table(getNamesDelete(arr));
+// == task-5 == //
 // Знайти вченого який народився найпізніше.
+const sortLastBorn = (first, second) => {
+  a = first.born;
+  b = second.born;
+  if (a < b) {
+    return -1;
+  }
+  if (a > b) {
+    return 1;
+  }
+  return 0;
+};
+const sortByLastYear = (users) =>
+  users
+    .sort(sortLastBorn)
+    .find((user, index, array) => index === array.length - 1);
 
-// // == task-6 == //
+console.log(sortByLastYear(arr));
+// == task-6 == //
 // Знайти рік народження Albert Einstein
-
-// // == task-7 == //
+const getBornAlbert = (users) =>
+  users.find((user) => user.name === "Albert" && user.surname === "Einstein")
+    .born;
+console.table(getBornAlbert(arr));
+// == task-7 == //
 // знайти вчених прізвище яких починається на літеру С
-
-// // == task-8 == //
+const getNamesByC = (users) => users.filter((user) => user.surname[0] === "C");
+console.table(getNamesByC(arr));
+// == task-8 == //
 // Видалити з масива всіх вчених імя яких починається на A
-
-// // == task-9 == //
+const getNamesByA = (users) => users.filter((user) => !(user.name[0] === "A"));
+console.table(getNamesByA(arr));
+// == task-9 == //
 // Знайти вченого який прожив найбільше і вченого який прожив найменьше
-
-// // == task-10 == //
+const sortByYearsCount = (users) =>
+  sortByYear(users).filter(
+    (user, index, array) => index === 0 || index === array.length - 1
+  );
+console.table(sortByYearsCount(arr));
+// == task-10 == //
 // Знайти вчених в яких співпадають перші літери імені і прізвища
-
-// // == task-11 == //
-// Дізнатися чи всі вченні працювали в 19 столітті
+const getNamesLetter = (users) =>
+  users.filter((user) => user.surname[0] === user.name[0]);
+console.table(getNamesLetter(arr));
+// == task-11 == //
+const isAllWork19 = (users) =>
+  // Дізнатися чи всі вченні працювали в 19 столітті
+  users.every((user) => Math.ceil(user.born / 100) === 19);
+console.table(isAllWork19(arr));
